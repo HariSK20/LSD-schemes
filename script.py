@@ -1,3 +1,39 @@
+def base1(val, op):
+	if op == 'b':
+		return int(val, 2)
+	elif op == 'o':
+		return int(val, 8)
+	elif op == 'd':
+		return int(val, 10)
+	elif op == 'h':
+		return int(val, 16)
+
+
+def operate(a , b, op):
+	if op == '*':
+		return a*b
+	elif op == '/':
+		return a/b
+	elif op == '+':
+		return a+b
+	elif op == '-':
+		return a-b
+	else:
+		return 0
+
+
+def eval_post(l):
+	num_stk = []
+	for i in l:
+		if type(i) is int:
+			num_stk.append(i)
+		else:
+			a = num_stk.pop()
+			b = num_stk.pop()
+			num_stk.append(operate(b, a, i))
+#		print(num_stk)
+	return(num_stk.pop())
+
 
 def rettop(stk):
 	try:
