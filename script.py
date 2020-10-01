@@ -94,3 +94,6 @@ def postfix(s, flg = 0):
 		except IndexError:
 			break
 	return(res)
+
+def main(s):
+	return(eval_post(postfix(s)))
