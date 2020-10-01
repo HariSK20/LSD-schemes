@@ -1,4 +1,18 @@
+#
+#		usage : import script
+#		script.evaluate('expression', 'return base')
+#
+
 def base1(val, op):
+	'''
+	converts val from any base to decimal
+	
+	Parameters:
+			'string' val, 'string' op
+
+	Returns:
+			'int' val in decimal form
+	'''
 	if op == 'b':
 		return int(val, 2)
 	elif op == 'o':
@@ -7,6 +21,26 @@ def base1(val, op):
 		return int(val, 10)
 	elif op == 'h':
 		return int(val, 16)
+
+
+def base2(val, op):
+	'''
+	Converts decimal val to any base op
+
+	Parameters: 
+			'int' val, 'string' op
+
+	Returns:
+			'string' val in the base op 
+	'''
+	if op == 'b':
+		return bin(int(val)).replace("0b", "")
+	elif op == 'o':
+		return oct(int(val)).replace("0o", "")
+	elif op == 'd':
+		return val
+	elif op == 'h':
+		return hex(int(val)).replace("0x", "")	
 
 
 def operate(a , b, op):
@@ -95,5 +129,17 @@ def postfix(s, flg = 0):
 			break
 	return(res)
 
-def main(s):
-	return(eval_post(postfix(s)))
+
+def evaluate(s, op='d'):
+	'''
+
+	Evaluates infix expression containing different bases
+
+	Parameters:
+			'string' s the expression, 'string' op the return base
+
+	Returns:
+			'string' evaluated value
+
+	'''
+	return(base2(eval_post(postfix(s)), op))
