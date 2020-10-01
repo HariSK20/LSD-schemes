@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import script as evaluate
+import script
 
 app = Flask(__name__)
 
@@ -11,7 +11,8 @@ def main():
 @app.route('/',methods=['POST'])
 def test():
     text = request.form['text']
-    return str(evaluate.main(text))
+    result = 'Result = '+str(script.evaluate(text))
+    return render_template("front.html", result = result)
 
 if __name__=="__main__":
     app.run()
