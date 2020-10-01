@@ -22,15 +22,19 @@
 
 	<section>
 		<article class="card">
-			<header class="card-header">
-				<h1><p> Multi-base Arithmetic </p></h1>
-				<h3> Checking </h3>
-				<label for="link">  <b> Enter expression : </b></label>
-				<form action="" method="POST">
-					<input type="text" name ="text" placeholder="Enter Here"><br>
-					<input type="submit" name ="evaluate" value ="Evaluate">
-				</form>
-			</header>
+			<div>
+				<header class="card-header">
+					<h1><p> Multi-base Arithmetic </p></h1>
+					<h3> Checking </h3>
+					<label for="link">  <b> Enter expression : </b></label>
+					<form action="" method="POST">
+						<input type="text" name ="text" placeholder="Enter Here"><br>
+						<input type="submit" name ="evaluate" value ="Evaluate">
+					</form>
+				</header>
+				<h1>{{ result }}</h1>
+
+			</div>
 		</article>
 	</section>
 
