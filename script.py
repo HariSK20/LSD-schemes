@@ -2,6 +2,7 @@
 #		usage : import script
 #		script.evaluate('expression', 'return base')
 #
+#               import os
 
 def base1(val, op):
 	'''
