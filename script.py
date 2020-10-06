@@ -2,7 +2,6 @@
 #		usage : import script
 #		script.evaluate('expression', 'return base')
 #
-#               import os
 
 def base1(val, op):
 	'''
@@ -59,6 +58,8 @@ def operate(a , b, op):
 
 def eval_post(l):
 	num_stk = []
+	if len(l) == 1:
+		return(l[0])
 	for i in l:
 		if type(i) is int:
 			num_stk.append(i)
@@ -87,7 +88,9 @@ def precedence(x):
 
 
 def postfix(s, flg = 0):
-	op_stk = []
+	if len(s) == 0:
+		return([0])
+	op_stk = ['$']
 	res = []
 	i=0
 	while(i < len(s)):
@@ -99,7 +102,10 @@ def postfix(s, flg = 0):
 				q += s[j]
 #				print(q)
 				j+=1
-			res.append(base1(q, s[i]))
+			try:
+				res.append(base1(q, s[i]))
+			except:
+				return([0])
 			i=j		
 		elif s[i] == '(':
 			op_stk.append(s[i])
@@ -107,8 +113,11 @@ def postfix(s, flg = 0):
 			p = op_stk.pop()
 			while p != '(':
 				res.append(p)
-				p = op_stk.pop()
-		else:
+				try:
+					p = op_stk.pop()
+				except:
+					return([0])
+		elif s[i] in ['+', '-', '*', '/']:
 #			op_stk.append(s[i])
 #			print(op_stk)
 			pre1 = precedence(s[i])
@@ -121,6 +130,10 @@ def postfix(s, flg = 0):
 #		print(res)
 #		print(op_stk)
 		i+=1
+	if len(res)==1:
+		return(res)
+	elif len(op_stk) == 0:
+		return([0])
 	p = op_stk.pop()
 	while p != '$':
 		res.append(p)
