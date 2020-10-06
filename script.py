@@ -57,6 +57,8 @@ def operate(a , b, op):
 
 
 def eval_post(l):
+	if len(l) == 1:
+		return(l[0])
 	num_stk = []
 	for i in l:
 		if type(i) is int:
@@ -86,7 +88,7 @@ def precedence(x):
 
 
 def postfix(s, flg = 0):
-	op_stk = []
+	op_stk = ['$']
 	res = []
 	i=0
 	while(i < len(s)):
@@ -107,7 +109,7 @@ def postfix(s, flg = 0):
 			while p != '(':
 				res.append(p)
 				p = op_stk.pop()
-		else:
+		elif s[i] in ['+', '-', '*', '/']:
 #			op_stk.append(s[i])
 #			print(op_stk)
 			pre1 = precedence(s[i])
@@ -120,6 +122,8 @@ def postfix(s, flg = 0):
 #		print(res)
 #		print(op_stk)
 		i+=1
+	if len(res)==1:
+		return(res)
 	p = op_stk.pop()
 	while p != '$':
 		res.append(p)
@@ -142,4 +146,7 @@ def evaluate(s, op='d'):
 			'string' evaluated value
 
 	'''
-	return(base2(eval_post(postfix(s)), op))
+	try:
+		return(base2(eval_post(postfix(s)), op))
+	except:
+		return('ERROR')
