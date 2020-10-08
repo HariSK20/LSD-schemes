@@ -1,6 +1,7 @@
 # LSD-schemes
 
-LINKS are LINKS
+A web app made using flask containing quick access to various important links for the Logic System Designs Class.
+Also has a mutibase calculator embedded to it.
 
 ### How to use the multibase calculator:
 	
