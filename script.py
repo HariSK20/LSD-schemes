@@ -2,6 +2,43 @@
 #		usage : import script
 #		script.evaluate('expression', 'return base')
 #
+def chid(c):
+	if c >= '0' and c <= '9':
+		return ord(c) - ord ('a')
+	elif c >= 'A' and c <= 'Z':
+		return ord(c) - ord('A')
+	elif c >= 'a' and c <= 'z':
+		return ord(c) - ord('a')
+
+def toDeci(str, base):
+	llen= len(str)
+	power = 1
+	num = 0
+	chidcache=0
+	for i in range(llen-1, -1 ,-1):
+		chidcache = chid(str[i])
+		if chidcache >= base:
+			return -1
+		num+= chidcache*power
+		power = power*base
+
+	return num
+def reVal(num): 
+  
+    if (num >= 0 and num <= 9): 
+        return chr(num + ord('0'))
+    else: 
+        return chr(num - 10 + ord('A'))
+
+def fromDeci(res, base, inputNum): 
+  
+    while inputNum > 0: 
+        res+= reVal(inputNum % base)
+        inputNum = int(inputNum / base)
+
+    res = res[::-1]
+  
+    return res
 
 def base1(val, op):
 	'''
@@ -21,6 +58,8 @@ def base1(val, op):
 		return int(val, 10)
 	elif op == 'h':
 		return int(val, 16)
+	else:
+		return toDeci(val , op)
 
 
 def base2(val, op):
@@ -40,7 +79,9 @@ def base2(val, op):
 	elif op == 'd':
 		return val
 	elif op == 'h':
-		return hex(int(val)).replace("0x", "")	
+		return hex(int(val)).replace("0x", "")
+##	else
+##		return fromDeci() use the from deciFucntion here @FIX
 
 
 def operate(a , b, op):
@@ -94,7 +135,7 @@ def postfix(s, flg = 0):
 	while(i < len(s)):
 		q=''
 		c = s[i]
-		if s[i] in ['b', 'o', 'd', 'h']:
+		if s[i] in ['b', 'o', 'd', 'h']: # I think the issue could be fixed here, but im not touching it as I dont have any idea about the logic @FIX
 			j=i+2
 			while(s[j] != ')'):
 				q += s[j]
